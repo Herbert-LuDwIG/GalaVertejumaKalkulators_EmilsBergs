@@ -9,6 +9,37 @@ public class GalvenaKlase {
 		Scanner scan = new Scanner(System.in);
 		DecimalFormat df = new DecimalFormat("0.#");
 		
+		int choice;
+		
+		do {
+			
+			System.out.println("1 - Ievadīt audzēkņus\n"
+					+ "2 - Ievadīt kritērijus\n"
+					+ "3 - Ievadīt kritēriju svaru\n"
+					+ "4 - Ievadīt vērtējumus\n"
+					+ "5 - Labot kritēriju\n"
+					+ "6 - Labot Kritērija svaru\n"
+					+ "7 - Labot iegūto atzīmi\n"
+					+ "8 - Aprēķināt gala vērtējumu\n"
+					+ "9 - Saglabāt rezultātus failā\n"
+					+ "10 - Nolasīt rezultātu no faila\n"
+					+ "0 - Apturēt programmu");
+			
+			
+			do {
+				System.out.println("\nKo darīsiet?");
+				while(!scan.hasNextInt()) {
+					System.out.println("Darbība nepastāv!");
+					scan.next();
+				}
+				choice = scan.nextInt();
+			}while(choice<0 || choice > 10);
+			
+			
+			
+			
+		}while(choice != 0);
+		
 		// Audzēkņu skaita ievade
 		do {
 			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
