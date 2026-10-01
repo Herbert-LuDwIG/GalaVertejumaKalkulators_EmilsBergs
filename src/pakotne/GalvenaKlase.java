@@ -4,52 +4,70 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class GalvenaKlase {
+	static public Scanner scan = new Scanner(System.in);
 	public static void main(String[] args) {
-		int studSk, kritSk;
-		Scanner scan = new Scanner(System.in);
+		int studSk = 0, kritSk = 0;
+		
 		DecimalFormat df = new DecimalFormat("0.#");
 		
 		int choice;
+		String[] studenti = null;
+		
+		String[] kriteriji = null; //kritSk
+		int[] kriterijaSvars = null; //kritSk
+		int[][] kriterijaVertejums = new int[studSk][kritSk];
+		double[] semestraVertejums = new double[studSk];
 		
 		do {
 			
-			System.out.println("1 - Ievadīt audzēkņus\n"
-					+ "2 - Ievadīt kritērijus\n"
-					+ "3 - Ievadīt kritēriju svaru\n"
-					+ "4 - Ievadīt vērtējumus\n"
-					+ "5 - Labot kritēriju\n"
-					+ "6 - Labot Kritērija svaru\n"
-					+ "7 - Labot iegūto atzīmi\n"
-					+ "8 - Aprēķināt gala vērtējumu\n"
-					+ "9 - Saglabāt rezultātus failā\n"
-					+ "10 - Nolasīt rezultātu no faila\n"
+			System.out.println("1 - Ievadīt audzēkņus un viņu vārdus\n"
+					+ "2 - Ievadīt kritērijus un to svaru\n"
+					+ "3 - Ievadīt vērtējumus\n"
+					+ "4 - Labot kritēriju\n"
+					+ "5 - Labot Kritērija svaru\n"
+					+ "6 - Labot iegūto atzīmi\n"
+					+ "7 - Aprēķināt gala vērtējumu\n"
+					+ "8 - Saglabāt rezultātus failā\n"
+					+ "9 - Nolasīt rezultātu no faila\n"
 					+ "0 - Apturēt programmu");
 			
-			
-			do {
-				System.out.println("\nKo darīsiet?");
-				while(!scan.hasNextInt()) {
-					System.out.println("Darbība nepastāv!");
-					scan.next();
-				}
-				choice = scan.nextInt();
-			}while(choice<0 || choice > 10);
+			choice = scan.nextInt();
 			
 			
+				
+			
+			
+			switch(choice) {
+			
+			case 1:
+				int n = Metodes.Audzekni(studSk);
+				studenti = new String[n];
+				studenti = Metodes.AudzekniVardi(studenti, n);
+					System.out.println("Studenti un viņi vārdi ir ievadīti!");
+			break;
+			case 2:
+				int n2 = Metodes.kriterijs(kritSk);
+				kriteriji = new String[n2];
+				kriterijaSvars = new int[n2];
+				kriteriji = Metodes.Kritnosaukumi(kriteriji);
+				kriterijaSvars = Metodes.ievadiKriterijus(kriteriji, kriterijaSvars);
+				break;
+			case 3:break;
+			case 4:break;
+			case 5:break;
+			case 6:break;
+			case 7:break;
+			case 8:break;
+			case 9:break;
+			case 10:break;
+			case 0:System.out.println("Programma apturēta!"); break;
+				default: System.out.println("Darbība nepastāv!");
+			}
 			
 			
 		}while(choice != 0);
 		
-		// Audzēkņu skaita ievade
-		do {
-			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
-			while(!scan.hasNextInt()) {
-				System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
-				scan.next();
-			}
-			studSk = scan.nextInt();
-		}while(studSk<1);
-		String[] studenti = new String[studSk];
+	
 		
 		// Vērtēšanas kritēriju skaita ievade
 		do {
@@ -60,20 +78,11 @@ public class GalvenaKlase {
 			}
 			kritSk = scan.nextInt();
 		}while(kritSk<1);
-		String[] kriteriji = new String[kritSk];
-		int[] kriterijaSvars = new int[kritSk];
-		int[][] kriterijaVertejums = new int[studSk][kritSk];
-		double[] semestraVertejums = new double[studSk];
+		
 		
 		scan.nextLine();
 		
-		// Ievada audzēkņu vārdus, uzvārdus
-		for(int i=0; i<studenti.length; i++) {
-			do {
-				System.out.println("Ievadi "+(i+1)+". studentu");
-				studenti[i] = scan.nextLine().trim();
-			} while(!studenti[i].matches("^[\\p{L} ]+$"));
-		}
+		
 		
 		// Definē kritērijus
 		int maxSvars = 100, sk = 1;
@@ -104,6 +113,8 @@ public class GalvenaKlase {
 			sk++;
 			scan.nextLine();
 		}
+		
+		
 		
 		// Norāda vērtējumu kādu ieguvis katrs audzēknis par katru kritēriju
 		for(int i=0; i<kriterijaVertejums.length; i++) {
@@ -137,6 +148,6 @@ public class GalvenaKlase {
 			System.out.println("Semestra vērtējums ir "+df.format(semestraVertejums[i])+" balles"
 					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		}
-		scan.close();
+		
 	}
 }
